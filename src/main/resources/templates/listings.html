@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Listings</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .create-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .create-button:hover {
+        background-color: #45a049;
+    }
+
+    .listing-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        width: 80%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .listing-card h3 {
+        margin: 0;
+        font-size: 1.5em;
+        color: #4CAF50;
+    }
+
+    .listing-detail {
+        margin: 8px 0;
+        color: #555;
+    }
+
+    .listing-detail strong {
+        color: #333;
+    }
+
+    .availability {
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+    .not-available {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<h2>Available Listings</h2>
+
+<!-- Create Listing Button -->
+<a href="/createListing" class="create-button">Create Listing</a>
+
+<div th:each="listing : ${listings}" class="listing-card">
+  <h3 th:text="${listing.title}">Title</h3>
+  <p class="listing-detail"><strong>Username:</strong> <span th:text="${listing.username}">Username</span></p>
+  <p class="listing-detail"><strong>Email:</strong> <span th:text="${listing.email}">Email</span></p>
+  <p class="listing-detail"><strong>Date:</strong> <span th:text="${listing.date}">Date</span></p>
+  <p class="listing-detail"><strong>Location:</strong> <span th:text="${listing.location}">Location</span></p>
+  <p class="listing-detail"><strong>Type:</strong> <span th:text="${listing.type}">Type</span></p>
+  <p class="listing-detail"><strong>Price:</strong> $<span th:text="${listing.price}">Price</span></p>
+  <p class="listing-detail">
+    <strong>Availability:</strong>
+    <span th:text="${listing.isAvailable ? 'Available' : 'Not Available'}"
+          th:classappend="${listing.isAvailable ? 'availability' : 'not-available'}">Availability</span>
+  </p>
+</div>
+</body>
+</html>
